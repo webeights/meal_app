@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/data/dummy_data.dart';
 import 'package:meal_app/models/meal.dart';
+import 'package:meal_app/providers/favorites_provider.dart';
 import 'package:meal_app/providers/meal_provider.dart';
 import 'package:meal_app/screens/categories.dart';
 import 'package:meal_app/screens/filters.dart';
@@ -84,6 +85,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     final meals = ref.watch(mealNotifierProvider);
+    final favoriteMeals = ref.watch(favoritesNotifierProvider);
     var availableMeals = meals.where((meal) {
       if (filteredMeal[Filters.glutenFree]! && !meal.isGlutenFree) {
         return false;
@@ -104,14 +106,12 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
     String title = 'Categories';
 
     Widget activeScreen = CategoriesScreen(
-      toggleFavorites: toggleFavorites,
       availableMeals: availableMeals,
     );
 
     if (currentIndex == 1) {
       activeScreen = MealScreen(
-        toggleFavorites: toggleFavorites,
-        meal: favoriteMeal,
+        meal: favoriteMeals,
       );
       title = 'Favorites';
     }

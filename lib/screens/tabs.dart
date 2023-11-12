@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:meal_app/data/dummy_data.dart';
-import 'package:meal_app/models/meal.dart';
 import 'package:meal_app/providers/favorites_provider.dart';
 import 'package:meal_app/providers/meal_provider.dart';
 import 'package:meal_app/screens/categories.dart';
@@ -25,7 +23,6 @@ class TabsScreen extends ConsumerStatefulWidget {
 
 class _TabsScreenState extends ConsumerState<TabsScreen> {
   var currentIndex = 0;
-  final List<Meal> favoriteMeal = [];
   Map<Filters, bool> filteredMeal = kInitialFilters;
 
   void switchTab(int index) {
@@ -46,24 +43,6 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
         ),
       ),
     );
-  }
-
-  void toggleFavorites(Meal meal) {
-    var isExisting = favoriteMeal.contains(meal);
-
-    if (!isExisting) {
-      setState(() {
-        favoriteMeal.add(meal);
-        infoMessage('Meal added to favorites');
-      });
-    }
-
-    if (isExisting) {
-      setState(() {
-        favoriteMeal.remove(meal);
-        infoMessage('Meal removed to favorites');
-      });
-    }
   }
 
   void switchScreens(String text) async {

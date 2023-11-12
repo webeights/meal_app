@@ -8,7 +8,15 @@ enum Filters {
 }
 
 class FiltersNotifier extends StateNotifier<Map<Filters, bool>> {
-  FiltersNotifier() : super({});
+  FiltersNotifier()
+      : super({
+          Filters.glutenFree: false,
+          Filters.lactoseFree: false,
+          Filters.vegetarian: false,
+          Filters.vegan: false,
+        });
+
+  void setFilter(Filters filters, bool activeFilter) {}
 }
 
 final filtersNotifierProvider =

@@ -9,9 +9,7 @@ class FavoritesNotifier extends StateNotifier<List<Meal>> {
 
     if (isExisting) {
       state = state.where((m) => m.id != meal.id).toList();
-      print(isExisting);
     } else {
-      print(isExisting);
       state = [...state, meal];
     }
   }

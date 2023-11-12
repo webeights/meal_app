@@ -65,6 +65,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
   Widget build(BuildContext context) {
     final meals = ref.watch(mealNotifierProvider);
     final favoriteMeals = ref.watch(favoritesNotifierProvider);
+
     var availableMeals = meals.where((meal) {
       if (filteredMeal[Filters.glutenFree]! && !meal.isGlutenFree) {
         return false;

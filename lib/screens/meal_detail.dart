@@ -18,10 +18,28 @@ class MealDetailScreen extends ConsumerWidget {
         title: Text(meal.title),
         actions: [
           IconButton(
-            onPressed: () => ref
-                .read(favoritesNotifierProvider.notifier)
-                .addToFavorites(meal),
-            icon: const Icon(Icons.star_outline_rounded),
+            onPressed: () {
+              final wasAdded = ref
+                  .read(favoritesNotifierProvider.notifier)
+                  .addToFavorites(meal);
+              ScaffoldMessenger.of(context).clearSnackBars();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  duration: const Duration(seconds: 3),
+                  content: Text(
+                    !wasAdded
+                        ? 'Meal added to favorites'
+                        : 'Meal removed from favorites',
+                  ),
+                  action: SnackBarAction(
+                    label: 'Close',
+                    onPressed: () =>
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+                  ),
+                ),
+              );
+            },
+            icon: Icon(Icons.star_outline_rounded),
           ),
         ],
       ),
